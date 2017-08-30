@@ -10,18 +10,15 @@ import 'entities/WebPage.manifest'
 view WebPageView of [WebPage] in 'artifacts/webpages.json'
 
 import 'particles/ShowWebPages.manifest'
-
-## works, seems to read from a magic 'list' view
-#recipe
-#  ShowWebPages
-  
-  
 import 'particles/ProductsFromWebPages.manifest'
-import 'https://polymerlabs.github.io/arcs-cdn/v0.03/particles/ShowProducts/ShowProducts.manifest'
 
 # doesn't work
 recipe
-  ProductsFromWebPages.products -> ShowProducts.list
-  
+  copy as view0
+  create as view1
+  ProductsFromWebPages.list -> ShowWebPages.list
+  #ShowWebPages
+  #  list <- view0
   ProductsFromWebPages
-  ShowProducts
+    list <- view0
+    products -> view1

@@ -5,9 +5,10 @@
 # subject to an additional IP rights grant found at
 # http://polymer.github.io/PATENTS.txt
 
-import '../../entities/WebPage.manifest'
+import '../entities/WebPage.manifest'
 
 particle ShowWebPages in 'ShowWebPages.js'
   ShowWebPages(in [WebPage] list)
+  affordance dom
   consume root
   description `Show ${list}`
