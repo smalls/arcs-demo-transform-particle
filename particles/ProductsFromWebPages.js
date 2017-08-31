@@ -14,8 +14,21 @@ defineParticle(({Particle}) => {
       console.log('ProductsFromWebPages setViews');
       this.on(views, 'list', 'change', e => {
         console.log('ProductsFromWebPages setViews.on callback');
-        let webPages = views.get('list');
-        // this.logDebug('webPages', webPages);
+        let webPagesInput = views.get('list');
+        var productsOutput = views.get('products');
+
+        webPagesInput.toList().then(function(input) {
+
+          for (let c of input) {
+            let ei = new productsOutput.entityClass({
+                'image': c['image'],
+                'name': c['name']
+            });
+            productsOutput.store(ei);
+          }
+
+          console.log('in closure done storing products', views.get('products'));
+        });
       });
     }
   }

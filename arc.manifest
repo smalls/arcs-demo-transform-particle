@@ -11,8 +11,9 @@ view WebPageView of [WebPage] in 'artifacts/webpages.json'
 
 import 'particles/ShowWebPages.manifest'
 import 'particles/ProductsFromWebPages.manifest'
+import 'particles/ProductsFromWebPages.manifest'
+import 'https://polymerlabs.github.io/arcs-cdn/v0.0.4/particles/ShowProducts/ShowProducts.manifest'
 
-# doesn't work
 recipe
   copy as view0
   create as view1
@@ -22,3 +23,6 @@ recipe
   ProductsFromWebPages
     list <- view0
     products -> view1
+
+recipe
+  ShowProducts
