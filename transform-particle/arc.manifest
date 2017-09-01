@@ -24,7 +24,8 @@ recipe
   # as write-only [Product]).
   create as view1
 
-  # Link within this recipe.
+  # Link within this recipe. If particles are not otherwise referenced in this
+  # recipe (as ShowWebPages is here) they'll be automatically made a part of it.
   ProductsFromWebPages.list -> ShowWebPages.list
 
   # Our transform particle.
@@ -32,11 +33,6 @@ recipe
     list <- view0
     products -> view1
 
-# This is implicitly created by the reference above
-# (specifically ProductsFromWebPages.list -> ShowWebPages.list).
-#recipe
-#  ShowWebPages
-
-# This, however, is required as there's no explicit linkage to this particle.
-recipe
+  # Link the ShowProducts particle to the output of ProductFromWebPages.
   ShowProducts
+    list <- view1
