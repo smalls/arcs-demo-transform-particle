@@ -7,6 +7,7 @@
 
 import 'entities/WebPage.manifest'
 
+# our static input view.
 view WebPageView of [WebPage] in 'artifacts/webpages.json'
 
 import 'particles/ShowWebPages.manifest'
@@ -14,14 +15,28 @@ import 'particles/ProductsFromWebPages.manifest'
 import 'https://polymerlabs.github.io/arcs-cdn/v0.0.4/particles/ShowProducts/ShowProducts.manifest'
 
 recipe
+  # Copy a global view into this recipe. The type is based on the declared
+  # link below to ProductsFromWebPages (in this case it will be inferred as
+  # read-only [WebPage]).
   copy as view0
+
+  # Create a new view (as above, the type is inferred based on the link
+  # as write-only [Product]).
   create as view1
 
+  # Link within this recipe.
   ProductsFromWebPages.list -> ShowWebPages.list
 
+  # Our transform particle.
   ProductsFromWebPages
     list <- view0
     products -> view1
 
+# This is implicitly created by the reference above
+# (specifically ProductsFromWebPages.list -> ShowWebPages.list).
+#recipe
+#  ShowWebPages
+
+# This, however, is required as there's no explicit linkage to this particle.
 recipe
   ShowProducts
