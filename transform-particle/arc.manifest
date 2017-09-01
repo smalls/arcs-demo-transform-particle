@@ -38,7 +38,7 @@ recipe
 # In parallel, let's create a recipe to show our data source directly, the
 # [WebPage] in the global view.
 recipe
-  # Make another copy of the same global view, as we did above.
+  # Make a copy of the global view, similarly to the recipe above.
   copy as view0
 
   # Link that view to a ShowWebPages particle.
