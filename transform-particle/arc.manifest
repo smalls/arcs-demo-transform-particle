@@ -7,21 +7,40 @@
 
 import 'entities/WebPage.manifest'
 
+# our static input view.
 view WebPageView of [WebPage] in 'artifacts/webpages.json'
 
 import 'particles/ShowWebPages.manifest'
 import 'particles/ProductsFromWebPages.manifest'
 import 'https://polymerlabs.github.io/arcs-cdn/v0.0.4/particles/ShowProducts/ShowProducts.manifest'
 
+# In this recipe, we'll transform a list of WebPage entities into a list of
+# Product entities, and display that list of Products.
 recipe
+  # Copy a global view into this recipe. The type is based on the declared
+  # link below to ProductsFromWebPages (in this case it will be inferred as
+  # read-only [WebPage]).
   copy as view0
+
+  # Create a new view (as above, the type is inferred based on the link
+  # as write-only [Product]).
   create as view1
 
-  ProductsFromWebPages.list -> ShowWebPages.list
-
+  # Our transform particle.
   ProductsFromWebPages
     list <- view0
     products -> view1
 
-recipe
+  # Link the ShowProducts particle to the output of ProductFromWebPages.
   ShowProducts
+    list <- view1
+
+# In parallel, let's create a recipe to show our data source directly, the
+# [WebPage] in the global view.
+recipe
+  # Make a copy of the global view, similarly to the recipe above.
+  copy as view0
+
+  # Link that view to a ShowWebPages particle.
+  ShowWebPages
+    list <- view0
