@@ -9,6 +9,6 @@ import 'https://$cdn/artifacts/Products/Product.schema'
 import 'https://$cdn/artifacts/Products/ShowProducts.manifest'
 
 recipe
-  copy as shortlist
+  copy #shortlist as shortlist
   ShowProducts
     list <- shortlist
