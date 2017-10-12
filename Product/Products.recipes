@@ -6,7 +6,7 @@
 # http://polymer.github.io/PATENTS.txt
 
 import 'https://$cdn/artifacts/Products/Product.schema'
-import 'https://$cdn/artifacts/Products/ShowProducts/ShowProducts.manifest'
+import 'https://$cdn/artifacts/Products/ShowProducts.manifest'
 
 recipe
   copy as shortlist
